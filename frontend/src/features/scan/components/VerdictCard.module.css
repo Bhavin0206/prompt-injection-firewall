@@ -1,0 +1,141 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+/* ---------- Tones ---------- */
+.success {
+  border-color: var(--color-success);
+  background: linear-gradient(
+    180deg,
+    var(--color-success-soft),
+    var(--color-surface) 60%
+  );
+  box-shadow: 0 0 0 1px var(--color-success-soft), var(--shadow-md);
+}
+
+.danger {
+  border-color: var(--color-danger);
+  background: linear-gradient(
+    180deg,
+    var(--color-danger-soft),
+    var(--color-surface) 60%
+  );
+  box-shadow: 0 0 0 1px var(--color-danger-soft), var(--shadow-md);
+}
+
+/* ---------- Header ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.status.success {
+  color: var(--color-success);
+}
+
+.status.danger {
+  color: var(--color-danger);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: var(--fs-md);
+  line-height: 1;
+}
+
+.success .icon {
+  background-color: var(--color-success-soft);
+  border: 1px solid var(--color-success);
+}
+
+.danger .icon {
+  background-color: var(--color-danger-soft);
+  border: 1px solid var(--color-danger);
+}
+
+/* ---------- Reason ---------- */
+.reason {
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* ---------- Confidence bar ---------- */
+.confidence {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.confidenceLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.confidenceValue {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.track {
+  height: 8px;
+  border-radius: 999px;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.fill.success {
+  background-color: var(--color-success);
+}
+
+.fill.danger {
+  background-color: var(--color-danger);
+}
+
+/* ---------- Empty state ---------- */
+.empty {
+  border-style: dashed;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  background: none;
+  box-shadow: none;
+  text-align: center;
+}
+
+.emptyText {
+  color: var(--color-text-muted);
+}

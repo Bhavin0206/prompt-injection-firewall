@@ -1,0 +1,200 @@
+/* ============================================================
+   Global styles + theme (DARK)
+   Single source of truth for colors, spacing, fonts, radius.
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ---------- Tailwind theme mapping ----------
+   Lets Tailwind utilities (bg-primary, text-muted, rounded-md, font-mono…)
+   use the same design tokens as the rest of the app. Light theme still
+   works through the :root[data-theme="light"] overrides below. */
+@theme {
+  --color-primary: #4f8cff;
+  --color-primary-hover: #3d7bf0;
+  --color-success: #2ecc71;
+  --color-danger: #ff4d5e;
+  --color-warning: #f5b544;
+  --color-bg: #0b1020;
+  --color-surface: #18213a;
+  --color-border: #26314d;
+  --color-muted: #93a1ba;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+:root {
+  /* ---------- Colors ---------- */
+  --color-bg: #0b1020;
+  --color-bg-elevated: #121a2e;
+  --color-surface: #18213a;
+  --color-border: #26314d;
+
+  --color-text: #e6ebf5;
+  --color-text-muted: #93a1ba;
+
+  --color-primary: #4f8cff;
+  --color-primary-hover: #3d7bf0;
+  --color-primary-soft: rgba(79, 140, 255, 0.14);
+
+  --color-success: #2ecc71;
+  --color-success-soft: rgba(46, 204, 113, 0.14);
+  --color-danger: #ff4d5e;
+  --color-danger-soft: rgba(255, 77, 94, 0.14);
+  --color-warning: #f5b544;
+  --color-warning-soft: rgba(245, 181, 68, 0.16);
+
+  /* ---------- Spacing ---------- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* ---------- Typography ---------- */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --fs-sm: 0.85rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+
+  /* ---------- Shadow ---------- */
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  /* ---------- Layout ---------- */
+  --max-width: 1100px;
+}
+
+/* ---------- LIGHT theme overrides ---------- */
+:root[data-theme="light"] {
+  --color-bg: #f4f6fb;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #eef1f7;
+  --color-border: #d7dce6;
+
+  --color-text: #16203a;
+  --color-text-muted: #5b6780;
+
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-soft: rgba(37, 99, 235, 0.12);
+
+  --color-success: #16a34a;
+  --color-success-soft: rgba(22, 163, 74, 0.12);
+  --color-danger: #dc2626;
+  --color-danger-soft: rgba(220, 38, 38, 0.12);
+  --color-warning: #d97706;
+  --color-warning-soft: rgba(217, 119, 6, 0.14);
+
+  --shadow-md: 0 8px 24px rgba(16, 24, 40, 0.1);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* ---------- Base ---------- */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+/* ---------- Robustness ---------- */
+pre,
+textarea {
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* ---------- Accessibility ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ---------- Shared helpers ---------- */
+.app-subtitle {
+  color: var(--color-text-muted);
+}
