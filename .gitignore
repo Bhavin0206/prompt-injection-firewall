@@ -1,0 +1,48 @@
+# ============================================
+# IGNORED FOLDERS / FILES (anything here will NOT go to GitHub)
+# Add one line per folder or file you want to ignore.
+# ============================================
+
+# --- Personal / notes (not project code) ---
+study/
+
+# --- ADD FUTURE FOLDERS TO IGNORE BELOW (one per line) ---
+# example-folder/
+# my-notes/
+# scratch/
+# ============================================
+
+
+# ---------- Node / React (frontend) ----------
+node_modules/
+dist/
+build/
+.cache/
+.env
+.env.local
+.env.*.local
+
+# ---------- Python (backend) ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# ---------- Local vector DB data ----------
+chroma_db/
+*.sqlite3
+
+# ---------- Logs & local data ----------
+logs/
+*.log
+data/local/
+
+# ---------- OS / Editor ----------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
