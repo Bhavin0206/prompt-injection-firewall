@@ -6,9 +6,10 @@ python-dotenv==1.2.3
 pydantic==2.13.5
 
 # ---- AI / Firewall (added as we build) ----
+google-genai==2.25.0
+openai==3.19.2
 # langgraph
 # langchain-core
 # sentence-transformers
 # chromadb
 # pytesseract
-# google-generativeai   (or openai)
