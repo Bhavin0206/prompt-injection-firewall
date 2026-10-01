@@ -58,9 +58,13 @@ class LLMDetector(Detector):
 
     async def detect(self, content: str) -> DetectorResult:
         if not self._client.configured:
-            return DetectorResult.no_hit(
-                self.name, details="LLM not configured (no API key) - skipped."
+            init_error = getattr(self._client, "init_error", "")
+            detail = (
+                f"LLM unavailable ({init_error}) - skipped."
+                if init_error
+                else "LLM not configured (no API key) - skipped."
             )
+            return DetectorResult.no_hit(self.name, details=detail)
 
         try:
             raw = await self._client.generate(_wrap(content), _SYSTEM)

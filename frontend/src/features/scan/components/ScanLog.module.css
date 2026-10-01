@@ -9,6 +9,8 @@
   align-items: center;
   gap: var(--space-sm);
   width: 100%;
+  min-width: 0; /* let children shrink instead of overflowing */
+  overflow: hidden;
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -32,15 +34,18 @@
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .attackType {
+  min-width: 0; /* required so ellipsis works inside the flex row */
+  flex: 1 1 auto;
   font-size: var(--fs-sm);
   color: var(--color-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-left: auto;
+  text-align: right;
 }
 
 .empty {

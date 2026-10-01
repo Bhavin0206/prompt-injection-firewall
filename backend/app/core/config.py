@@ -63,6 +63,12 @@ class Settings:
     # Refuse content larger than this (characters) with a 400.
     MAX_CONTENT_LENGTH_CHARS: int = _env_int("MAX_CONTENT_LENGTH_CHARS", 20000)
 
+    # Neutralizer: attacks at/above this confidence are hard-BLOCKED;
+    # attacks below it (but still above the detector threshold) are FLAGGED.
+    NEUTRALIZER_BLOCK_THRESHOLD: float = _env_float(
+        "NEUTRALIZER_BLOCK_THRESHOLD", 0.80
+    )
+
     # ---- Local vector DB ----
     CHROMA_DIR: str = os.getenv("CHROMA_DIR", "data/chroma")
 

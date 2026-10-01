@@ -26,7 +26,7 @@ class Verdict:
     attack_type: str | None
     confidence: float  # 0..1 (attack confidence, or safe confidence when clean)
     reason: str
-    detector: str | None  # which detector decided (None when SAFE)
+    detector: str | None = None  # which detector decided (None when SAFE)
     results: list[DetectorResult] = field(default_factory=list)  # raw results
 
 
@@ -50,8 +50,19 @@ class DecisionEngine:
 
     async def scan(self, content: str) -> Verdict:
         """Run all detectors (in parallel) and decide."""
-        results = await asyncio.gather(*(d.detect(content) for d in self._detectors))
+        results = await asyncio.gather(
+            *(self._safe_detect(d, content) for d in self._detectors)
+        )
         return self._decide(list(results))
+
+    async def _safe_detect(self, detector: Detector, content: str) -> DetectorResult:
+        """Run one detector; a failure becomes a no-hit so others still decide."""
+        try:
+            return await detector.detect(content)
+        except Exception as exc:  # noqa: BLE001 - never let one detector crash the scan
+            return DetectorResult.no_hit(
+                detector.name, details=f"{detector.name} detector failed: {exc}"
+            )
 
     # ---- decision ----
     def _decide(self, results: list[DetectorResult]) -> Verdict:

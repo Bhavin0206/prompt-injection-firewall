@@ -81,6 +81,8 @@
 .reason {
   color: var(--color-text);
   line-height: 1.6;
+  overflow-wrap: anywhere; /* long tokens/URLs wrap instead of overflowing */
+  word-break: break-word;
 }
 
 /* ---------- Confidence bar ---------- */

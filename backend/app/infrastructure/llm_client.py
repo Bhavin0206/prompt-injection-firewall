@@ -26,11 +26,15 @@ class LLMClient:
         self._provider = settings.llm_provider
         self._model = settings.llm_model
         self._client = None
+        self._init_error = ""
+
+        if not settings.has_llm_key:
+            return
 
         # Import the SDK lazily so the app runs even when it's not installed
-        # or no key is configured. Timeouts + tiny retry budgets keep the
-        # firewall responsive instead of hanging on quota/network errors.
-        if settings.has_llm_key:
+        # or no key is configured. Any failure here MUST NOT crash the app:
+        # we fall back to "not configured" and the rule detector keeps working.
+        try:
             if self._provider == PROVIDER_OPENAI:
                 from openai import OpenAI
 
@@ -52,6 +56,9 @@ class LLMClient:
                 self._client = genai.Client(
                     api_key=settings.LLM_API_KEY, http_options=http_options
                 )
+        except Exception as exc:  # noqa: BLE001 - missing SDK, bad config, etc.
+            self._init_error = f"{type(exc).__name__}: {exc}"
+            self._client = None
 
     # ---- info ----
     @property
@@ -66,6 +73,11 @@ class LLMClient:
     @property
     def model(self) -> str:
         return self._model
+
+    @property
+    def init_error(self) -> str:
+        """Why the client could not be created (empty when it's fine)."""
+        return self._init_error
 
     # ---- main entry point ----
     async def generate(self, prompt: str, system_instruction: str = "") -> str:
