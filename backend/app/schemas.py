@@ -65,3 +65,49 @@ class ScanResponse(BaseModel):
         le=100.0,
         description="Confidence as a percentage (0-100).",
     )
+
+
+# ----------------------------------------------------------------- Way 2 agent
+class AgentSource(BaseModel):
+    """One source the agent fetches from."""
+
+    type: str = Field(..., description="'url' or 'folder'.")
+    value: str = Field(..., description="The URL or the folder path.")
+    label: str | None = Field(None, description="Optional display label.")
+
+
+class AgentRunRequest(BaseModel):
+    """Sources for one agent run. Empty -> the sample folder is used."""
+
+    sources: list[AgentSource] = Field(default_factory=list)
+
+
+class AgentSummary(BaseModel):
+    """Dashboard counts for a run."""
+
+    fetched: int = 0
+    blocked: int = 0
+    passed: int = 0
+    flagged: int = 0
+    errors: int = 0
+
+
+class AgentItemResult(BaseModel):
+    """Firewall outcome for one fetched item."""
+
+    source: str = ""
+    label: str = ""
+    verdict: Verdict
+    attackType: str | None = None
+    reason: str = ""
+    confidence: float = 0.0
+    action: str = ""
+    blocked: bool = False
+
+
+class AgentRunResponse(BaseModel):
+    """Result of one agent pass."""
+
+    summary: AgentSummary
+    results: list[AgentItemResult] = Field(default_factory=list)
+    errors: list[str] = Field(default_factory=list)

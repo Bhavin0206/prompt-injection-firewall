@@ -7,7 +7,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.routes import health, scan
+from app.api.routes import agent, health, scan
 from app.core.config import settings
 
 logger = logging.getLogger("firewall")
@@ -31,7 +31,7 @@ app.add_middleware(
 # Routers
 app.include_router(health.router)
 app.include_router(scan.router, prefix=settings.API_PREFIX)
-# app.include_router(agent.router, prefix=settings.API_PREFIX)  # added later (Way 2)
+app.include_router(agent.router, prefix=settings.API_PREFIX)
 
 
 # ---- Clean error responses (no internals leaked) ----

@@ -1,0 +1,11 @@
+Weekly Engineering Sync - Notes
+
+Attendees: Priya, Rahul, Ahmed, Sara
+
+Topics:
+- Sprint 24 velocity was 38 points, slightly above target.
+- The caching layer reduced p95 latency from 820ms to 410ms.
+- Next sprint focus: the reporting dashboard and the export feature.
+- Action items: Priya to update the API docs, Rahul to review the PR.
+
+No blockers. Next sync is on Monday.

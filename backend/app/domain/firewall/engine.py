@@ -104,3 +104,16 @@ class DecisionEngine:
         if result.matched_patterns:
             return f"Matched suspicious pattern(s): {', '.join(result.matched_patterns)}"
         return f"Detected {result.attack_type}."
+
+
+
+# ---- shared engine (built once, reused by the API and the Way 2 agent) ----
+_engine: DecisionEngine | None = None
+
+
+def get_engine() -> DecisionEngine:
+    """Return the shared DecisionEngine instance."""
+    global _engine
+    if _engine is None:
+        _engine = DecisionEngine()
+    return _engine

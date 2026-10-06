@@ -81,3 +81,15 @@ class Neutralizer:
                 "Passed with a warning."
             ),
         )
+
+
+# ---- shared neutralizer (stateless; reused by the API and the agent) ----
+_neutralizer: Neutralizer | None = None
+
+
+def get_neutralizer() -> Neutralizer:
+    """Return the shared Neutralizer instance."""
+    global _neutralizer
+    if _neutralizer is None:
+        _neutralizer = Neutralizer()
+    return _neutralizer

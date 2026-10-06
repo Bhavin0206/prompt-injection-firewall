@@ -1,10 +1,14 @@
 """Application configuration (env vars, constants)."""
 
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# backend/ (config.py is at backend/app/core/config.py -> parents[2])
+_BASE_DIR = Path(__file__).resolve().parents[2]
 
 
 def _env_int(name: str, default: int) -> int:
@@ -67,6 +71,14 @@ class Settings:
     # attacks below it (but still above the detector threshold) are FLAGGED.
     NEUTRALIZER_BLOCK_THRESHOLD: float = _env_float(
         "NEUTRALIZER_BLOCK_THRESHOLD", 0.80
+    )
+
+    # ---- Agent (Way 2) ----
+    FETCH_TIMEOUT_SECONDS: int = _env_int("FETCH_TIMEOUT_SECONDS", 15)
+    FETCH_MAX_BYTES: int = _env_int("FETCH_MAX_BYTES", 2_000_000)  # 2 MB cap
+    # Default folder used when a run gives no sources (handy for the demo).
+    SAMPLE_SOURCES_DIR: str = os.getenv(
+        "SAMPLE_SOURCES_DIR", str(_BASE_DIR / "data" / "sample_sources")
     )
 
     # ---- Local vector DB ----
