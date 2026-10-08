@@ -79,9 +79,11 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 
-# create .env (see .env.example) and add an LLM key:
+# create your .env from the template, then add an LLM key:
+copy .env.example .env
 #   LLM_PROVIDER=gemini
 #   LLM_API_KEY=<your key>
+# (No key? It still runs — the rule detector works on its own.)
 
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --port 8000
 ```
