@@ -7,6 +7,7 @@
 study/
 make_tracker.py
 test_sources/
+demo.mp4
 
 # --- ADD FUTURE FOLDERS TO IGNORE BELOW (one per line) ---
 # example-folder/
